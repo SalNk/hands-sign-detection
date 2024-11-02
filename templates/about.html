@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}About{% endblock %} {% block content
+%}
+<div style="margin-top: 150px">
+  <div class="container mt-4">
+    <h1 class="mt-4">À propos de cette application</h1>
+    <p>
+      Cette application web développée avec Flask a pour objectif principal de
+      faciliter la capture, le traitement et la sauvegarde d'images à partir
+      d'une caméra. Elle intègre plusieurs fonctionnalités interactives
+      permettant à l'utilisateur de :
+    </p>
+    <ul>
+      <li>Capturer des images en temps réel via la caméra connectée.</li>
+      <li>
+        Recadrer automatiquement les images pour isoler la main à l'aide de la
+        bibliothèque
+        <strong>OpenCV</strong> et <strong>cvzone</strong>.
+      </li>
+      <li>
+        Sauvegarder les images capturées dans un dossier défini par
+        l'utilisateur, avec la possibilité de personnaliser l'emplacement de
+        stockage.
+      </li>
+      <li>
+        Afficher un flux vidéo en direct dans l'interface utilisateur,
+        permettant un retour visuel avant la capture de l'image.
+      </li>
+      <li>
+        Analyser les images capturées via une page dédiée à l'analyse,
+        fournissant des fonctionnalités supplémentaires selon les besoins
+        futurs.
+      </li>
+    </ul>
+    <p>
+      L'application utilise <strong>Bootstrap</strong> pour garantir une
+      interface utilisateur fluide et responsive, permettant de naviguer
+      facilement entre les différentes pages telles que la capture d'images,
+      l'analyse et la présentation d'informations générales sur l'application.
+    </p>
+    <p>
+      Cette application fournit la possibilité de tradruire certains signes
+      statiques(enregistrés au préable) du langage des signes utilisés en RDC en
+      texte.
+    </p>
+  </div>
+</div>
+{% endblock %}

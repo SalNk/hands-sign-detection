@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block title %}Save Image{% endblock %} {% block
+content %}
+<div
+  class="container d-flex flex-column align-items-center"
+  style="margin-top: 100px"
+>
+  <h1 class="text-center fs-3">Sauvegarder le signe</h1>
+  <p class="text-center">
+    Bienvenue sur la page de sauvegarde. Ici, vous pouvez sauvegarder votre
+    signe statique.
+  </p>
+  <!-- Vidéo en direct -->
+  <div class="text-center my-4">
+    <img
+      class="border border-primary rounded"
+      src="{{ url_for('save_image.video_feed') }}"
+      alt="Video Feed"
+      style="width: 80%; height: 400px"
+    />
+  </div>
+
+  <!-- Formulaire pour le choix du dossier -->
+  <div class="mb-3" style="width: 80%">
+    <label for="folder" class="form-label"
+      >Nom du dossier de sauvegarde :</label
+    >
+    <input
+      type="text"
+      id="folder"
+      name="folder"
+      class="form-control"
+      placeholder="Entrez le nom du dossier"
+    />
+  </div>
+
+  <!-- Bouton pour sauvegarder l'image -->
+  <div class="text-center mb-4">
+    <button class="btn btn-primary" onclick="saveImage()">
+      Sauvegarder l'image
+    </button>
+  </div>
+  <div class="text-white">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    Lorem Ipsum has been the industry's standard dummy text ever since the
+    1500s, when an unknown printer took a galley of type and scrambled it to
+    make a type specimen book. It has survived not only five centuries, but also
+    the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing
+    Lorem Ipsum passages, and more recently with deskto
+  </div>
+</div>
+
+<!-- Script pour sauvegarder l'image -->
+<script>
+  function saveImage() {
+    const folderName = document.getElementById("folder").value || "test"; // Si vide, utiliser "test"
+
+    fetch("{{ url_for('save_image.save_image') }}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ folder: folderName }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        if (data.filename) {
+          console.log("Image sauvegardée : " + data.filename);
+        }
+      })
+      .catch((error) => console.error("Error save label : ", error));
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block title %}Analyze{% endblock %} {% block
+content %}
+<div
+  class="container mt-4 d-flex flex-column justify-content-md-center align-items-center"
+>
+  <h1 class="text-center fs-3">Analyser les signes</h1>
+  <p class="text-center fs-6">
+    Bienvenue sur la page d'analyse. Ici, vous pouvez voir les résultats de vos
+    analyses.
+  </p>
+
+  <!-- Affichage de l'étiquette actuelle -->
+  <div class="text-center my-2">
+    <h3 class="fs-4">
+      Signe actuel : <span id="current-label">[Aucune main détectée]</span>
+    </h3>
+  </div>
+
+  <!-- Vidéo en direct -->
+  <div>
+    <div class="text-center my-4">
+      <img
+        src="{{ url_for('analyze.video_feed') }}"
+        alt="Video Feed"
+        class="border border-primary rounded"
+        style="width: 100%; height: 500px"
+      />
+    </div>
+  </div>
+
+  <script>
+    // Fonction pour lire le texte du label
+    function speakLabel(label) {
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(label);
+        utterance.lang = "fr-FR"; // Langue en français
+        window.speechSynthesis.speak(utterance);
+      } else {
+        console.error("Synthèse vocale non supportée par le navigateur.");
+      }
+    }
+
+    let previousLabel = "[Aucune main détectée]"; // Stocke le label précédent
+
+    function fetchLabel() {
+      fetch("{{ url_for('analyze.get_current_label') }}")
+        .then((response) => response.json())
+        .then((data) => {
+          const currentLabel = data.label || "[Aucune main détectée]";
+          document.getElementById("current-label").textContent = currentLabel;
+
+          // Si le label a changé, lire le nouveau label
+          if (currentLabel !== previousLabel) {
+            speakLabel(currentLabel); // Lire le nouveau label
+            previousLabel = currentLabel; // Mettre à jour le label précédent
+          }
+        })
+        .catch((error) => console.error("Error fetching label:", error));
+    }
+
+    // Mettre à jour l'étiquette toutes les secondes
+    setInterval(fetchLabel, 1000);
+  </script>
+</div>
+{% endblock %}

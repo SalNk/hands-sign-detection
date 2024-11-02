@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<!-- Hero 5 - Bootstrap Brain Component -->
+<section
+  class="bsb-hero-5 px-3 bsb-overlay"
+  style="
+    background-image: url('https://img.freepik.com/free-photo/oh-hello-nice-meet-you-portrait-surprised-african-american-man-greet-friend-didnt-expect-see-person_176420-33825.jpg?ga=GA1.2.452966945.1711439910&semt=ais_hybrid');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <div class="container">
+    <div class="row justify-content-md-center align-items-center">
+      <div class="col-12 col-md-11 col-lg-9 col-xl-8">
+        <h2 class="display-2 text-white text-center fw-bold mb-4">
+          Bienvenue sur l'application RLS
+        </h2>
+        <p
+          class="lead text-white text-center mb-5 d-flex justify-content-sm-center"
+        >
+          <span class="col-12 col-sm-10 col-md-8">
+            L'application Reconnaissance du Langage des Signes permet d'analyser
+            un signe statique de la main(enregistrée) et affiche la traduction
+            du signe en texte équivalent et plus encore.</span
+          >
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="/save_image" class="btn bsb-btn-2xl btn btn-primary">
+            Analyser un signe
+          </a>
+          <a href="/save_image" class="btn bsb-btn-2xl btn-outline-light">
+            Enregistrer un signe
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

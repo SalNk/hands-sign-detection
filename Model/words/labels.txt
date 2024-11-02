@@ -1,0 +1,4 @@
+0 Bonjour
+1 Non
+2 Oui
+3 Tu vas bien
